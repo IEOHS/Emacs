@@ -1,0 +1,128 @@
+cap /proc/version
+cat /proc/version 
+apt-cyg install g++
+apt-cyg -help
+apt-cyg --help
+apt-cyg packages fortran
+apt-cyg find fortran
+apt-cyg find g++
+ls
+ls
+ls -al
+apt-cyg find r-base
+apt-cyg find fortran
+apt-cyg find build 
+apt-cyg install gcc-fortran
+apt-cyg find lsblk
+apt-cyg find lsusb
+exit
+ls
+ls -al
+cd
+ls
+source ./.bashrc
+source
+ls
+cd R
+ls
+ls -al
+cd ../Mail/
+ls
+ls -al
+cd ../
+ls
+ls -al
+cd .elmo/
+ls
+tree
+apt-cyg -h
+apt-cyg -help
+apt-cyg --help
+git
+git --version
+git log
+cd
+ls
+ls -al
+mkdir TestFolder_Shoei
+ls -al
+ls
+cd TestFolder_Shoei/
+ls
+ls
+ls -al
+ls -l
+..
+ls
+exit
+ls
+ls -al
+cd ../
+ls
+ls -al
+cd home
+ls
+ls -al
+cd 
+ls
+cd .emacs 
+ls
+cd .emacs.d/
+ls
+emacs init.el 
+ls
+apt-cyg update
+apt-cyg --help
+apt-cyg show
+apt-cyg find fortran
+apt-cyg install fortran
+apt-cyg install gcc4-fortran
+apt-cyg install gcc-fortranfortran
+apt-cyg install gcc-fortran
+ls
+ls -al
+./mingw-w64-install.exe 
+gfortran
+eshell gnupack_devel-13.06-2015.11.08/
+ls
+gcc
+exit
+ls
+ls -al
+cd gnupack_devel-13.06-2015.11.08/
+ls
+ls -al
+cd ~
+ls
+ls -al
+./a.exe 
+./Run\ terminal.lnk 
+eshell ./Run\ terminal.lnk 
+ls
+ls -al
+exir
+exit
+ls
+ls -a
+cd Fortran/
+ls
+cd 2nd
+ls
+ls -al
+gnuplot
+apt-cyg find gnuplot
+apt-cyg update
+ls
+ls -al
+time ls
+time ls -al
+R
+ls
+ls -al
+git --version
+git --help
+exit
+ls
+ls -al
+ls -als
+tree --si
