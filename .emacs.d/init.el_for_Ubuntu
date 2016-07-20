@@ -43,6 +43,9 @@
 ;;引数のディレクトリとそのサブディレクトリをload-pathに追加
 (add-to-load-path "elisp" "conf" "public_repos" )
 
+;;初期画面を分割しない
+(setq inhibit-startup-message t)
+
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ package manager                                               ;;;
