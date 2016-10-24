@@ -1,3 +1,3 @@
 ## Emacs Setting
-+ Ordinary use for Ubuntu and Windows Emacs
- 
+ - Ordinary use for Ubuntu and Windows Emacs
+
