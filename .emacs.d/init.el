@@ -1,24 +1,3 @@
-;;; .emacs --- dot emacs file
-
-;; This file is NOT part of GNU Emacs.
-
-;; This file is free software; you can redistribute it and/or
-;; modify it under the terms of the GNU General Public License as
-;; published by the Free Software Foundation; either version 2 of
-;; the License, or (at your option) any later version.
-
-;; This file is distributed in the hope that it will be
-;; useful, but WITHOUT ANY WARRANTY; without even the implied
-;; warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-;; PURPOSE.  See the GNU General Public License for more details.
-
-;; You should have received a copy of the GNU General Public
-;; License along with this file; if not, write to the Free
-;; Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
-;; MA 02111-1307, USA.
-
-;;; Code:
-
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ site-lisp                                                     ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -46,7 +25,6 @@
 ;;初期画面を分割しない
 (setq inhibit-startup-message t)
 
-
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ package manager                                               ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -57,6 +35,21 @@
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
+
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
+;;; @ auto-install                                                  ;;;
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
+
+(when (require 'auto-install nil t)
+  ;;インストールディレクトリを設定する。初期値は~/.emacs.d/auto-install/
+  (setq auto-install-directory "~/.emacs.d/elisp/")
+  ;;wgetを使って、インターネット接続を確認する
+  (setq auto-install-use-wget t)
+  ;;EmacsWikiに登録されているelispの名前を取得する
+  (auto-install-update-emacswiki-package-name t)
+  ;;install-elispの関数を利用可能にする
+  (auto-install-compatibility-setup))
+
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ theme                                                         ;;;
@@ -202,8 +195,6 @@
 ;;"C-t"でウィンドウを切り替える。初期値はtranspose-chars
 (define-key global-map (kbd "C-t") 'other-window)
 
-;; C-zでundo
-;;(define-key global-map (kbd "C-z") 'undo)
 
 
 ;;時計を表示
@@ -289,7 +280,7 @@
 
 ;; hiwin-modeを有効化
 (hiwin-activate)                           ;; hiwin-modeを有効化
-(set-face-background 'hiwin-face "gray30") ;; 非アクティブウィンドウの背景色を設定
+(set-face-background 'hiwin-face "gray8") ;; 非アクティブウィンドウの背景色を設定
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -317,6 +308,7 @@
 
 (load-library "migemo")
 
+(setq helm-migemo-mode t)
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ file - backup                                                 ;;;
@@ -390,8 +382,6 @@
 ;; 横スクロール時の列数
 (setq hscroll-step 1)
 
-;; スクロールダウン
-;;(global-set-key (kbd "C-z") 'scroll-down)
 
 ;; バッファの最後までスクロールダウン
 (defadvice scroll-down (around scroll-down activate compile)
@@ -418,20 +408,6 @@
         (goto-char (point-max))
       ad-do-it) ))
 
-
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ shell                                                         ;;;
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-
-;(require 'shell)
-;(setq explicit-shell-file-name "/bin/bash")
-;(setq shell-command-switch "-c")
-;(setq shell-file-name "/bin/bash")
-;;; (setq explicit-bash.exe-args '("--login" "-i"))
-;
-;;; (M-! and M-| and compile.el)
-;(setq shell-file-name "/bin/bash")
-;(modify-coding-system-alist 'process ".*sh\\" 'utf-8)
 
 
 
@@ -460,22 +436,6 @@
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ auto-install                                                  ;;;
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-
-(when (require 'auto-install nil t)
-  ;;インストールディレクトリを設定する。初期値は~/.emacs.d/auto-install/
-  (setq auto-install-directory "~/.emacs.d/elisp/")
-  ;;EmacsWikiに登録されているelispの名前を取得する
-  (auto-install-update-emacswiki-package-name t)
-  ;;必要であればプロキシの設定を行う
-  ;;(setq url-proxy-service '(("http" . "localhost:8339")))
-  ;;install-elispの関数を利用可能にする
-  (auto-install-compatibility-setup))
-
-
-
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ auto-complete                                                 ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
@@ -494,6 +454,7 @@
 (when (locate-library "ess-site")
   (require 'ess-site)
  )
+
 (setq auto-mode-alist
       (cons (cons "\\.[rR]$" 'R-mode) auto-mode-alist))
 (autoload 'R-mode "ess-site" "Emacs Speaks Statistics mode" t)
@@ -503,7 +464,18 @@
 (setq ess-use-auto-complete t)
 ;; (setq ess-use-auto-complete 'script-only)
 )
+;;(require ‘auto-complete-acr)
 
+;; 最初に ESS を呼び出した時の処理
+;; アンダースコアの入力が " <- " にならないようにする
+(ess-toggle-underscore nil)
+;; C-c C-g で オブジェクトの内容を確認できるようにする
+(require 'ess-R-object-popup nil t)
+;; キャレットがシンボル上にある場合にもエコーエリアにヘルプを表示する
+(setq ess-eldoc-show-on-symbol t)
+;; # の数によってコメントのインデントの挙動が変わるのを無効にする
+(setq ess-fancy-comments nil)
+(setq ess-loaded-p t)
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ R-mode                                                        ;;;
@@ -514,6 +486,14 @@
 
 ;; R 起動時にワーキングディレクトリを訊ねない
 (setq ess-ask-for-ess-directory nil)
+
+;; インデントの幅を4にする（デフォルト2）
+(setq ess-indent-level 4)
+;; インデントを調整
+(setq ess-arg-function-offset-new-line (list ess-indent-level))
+;; comment-region のコメントアウトに # を使う（デフォルト##）
+(make-variable-buffer-local 'comment-add)
+(setq comment-add 0)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -528,9 +508,9 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 ;; wl メール設定 ~/.wl, ~/.folderも一緒に設定する
-(autoload 'wl "wl" "Wanderlust" t)
-(autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
-(autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
+;;(autoload 'wl "wl" "Wanderlust" t)
+;;(autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
+;;(autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -547,10 +527,18 @@
 (define-key global-map (kbd "C-x C-f") 'helm-find-files)
 (define-key global-map (kbd "M-x") 'helm-M-x)
 (define-key global-map (kbd "M-y") 'helm-show-kill-ring)
-(define-key global-map (kbd "C-j") 'helm-occur)
+;;(define-key global-map (kbd "C-j") 'helm-occur)
+(define-key global-map (kbd "C-j") 'helm-swoop)
+(keyboard-translate ?\C-z ?\M-%)
 
 ;; helm-R
 (require 'helm-R)
+
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
+;;; @ all-ext                                                       ;;;
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
+(require 'all-ext)
+
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ magit                                                         ;;;
@@ -582,11 +570,6 @@
       '((".*MigMix 2P*." . 1.1)
 	))
 
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; DDSKK                                                           ;;;
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;(global-set-key (kbd "C-x C-j") 'skk-mode)
-
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; Markdown-mode                                                   ;;;
@@ -600,14 +583,3 @@
             ("\\.markdown\\'" . markdown-mode))
      :init (setq markdown-command "/usr/bin/multimarkdown"))
 
-;(autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
-;(setq auto-mode-alist (cons '("\\.markdown" . markdown-mode) auto-mode-alist))
-;(setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
-
-
-;; Local Variables:
-;; coding: utf-8
-;; mode: emacs-lisp
-;; End:
-
-;;; ends here
