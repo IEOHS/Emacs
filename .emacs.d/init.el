@@ -66,7 +66,8 @@
 (load-theme 'gnupack-dark t)
 
 ;;背景色設定
-(set-face-background 'default "black")
+;;(set-face-background 'default "black")
+(set-face-background 'default "gray5")
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ screen - buffer                                               ;;;

@@ -1,10 +1,3 @@
-/app/cygwin
-/app/cygwin/cygwin/lib
-/app/cygwin/cygwin/bin
-/app/cygwin/cygwin
-/app/cygwin/cygwin/etc
-/app/cygwin/cygwin/etc/stunnel
-/home/.certs
 /home/.certs/certs-20110624
 /home/.certs
 /home/.certs
@@ -31,3 +24,10 @@
 /home/k-taiki/.emacs.d
 ~/MODEL_NEW/metprog/arw2arl
 ~/.emacs.d
+~/MODEL_NEW/flexpart_wrf-3.3
+~/Model
+~/MODEL_NEW/Intel/CMAQv5.0.2/scripts
+/home/k-taiki/MODEL_NEW/Intel/CMAQv5.0.2/lib
+/home/k-taiki/MODEL_NEW/Intel/CMAQv5.0.2/lib/ioapi
+/home/k-taiki/MODEL_NEW/Intel/CMAQv5.0.2/lib/ioapi/Linux4_x86_64ifort
+~/MODEL_NEW/Intel/CMAQv5.0.2/scripts

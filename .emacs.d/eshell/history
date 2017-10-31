@@ -1,32 +1,3 @@
-source
-ls
-cd R
-ls
-ls -al
-cd ../Mail/
-ls
-ls -al
-cd ../
-ls
-ls -al
-cd .elmo/
-ls
-tree
-apt-cyg -h
-apt-cyg -help
-apt-cyg --help
-git
-git --version
-git log
-cd
-ls
-ls -al
-mkdir TestFolder_Shoei
-ls -al
-ls
-cd TestFolder_Shoei/
-ls
-ls
 ls -al
 ls -l
 ..
@@ -126,3 +97,32 @@ for dd in 21 22;do echo $dd done
 ls
 ls -al
 exit
+pwd
+ls
+ls
+ls ../MODEL_NEW/
+tree -L 2 ../MODEL_NEW/
+tree -L 2 ../MODEL_NEW
+tree -L 2 ../MODEL_NEW/
+ls ../MODEL_NEW/
+tree ../MODEL_NEW/
+tree
+tree ~/MODEL_NEW/
+ls
+exit
+which mpif90
+which mpicc
+cd ../lib/
+ls
+cd ioapi/
+ls
+cd Linux4_x86_64ifort/
+ls
+ls -al
+rm ./*
+ls
+ln -s /usr/local/intel/ioapi-3.1/Linux4_x86_64ifort/libioapi.a ./
+ln -s /usr/local/intel/ioapi-3.1/Linux4_x86_64ifort/*.mod ./
+ln -s /usr/local/intel/ioapi-3.1/ioapi/fixed_src/* ./
+ls -alh
+cat ../../intelrc | grep source
