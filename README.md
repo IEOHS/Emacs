@@ -6,3 +6,6 @@
 
 #### 2017/11/1 change for Ubuntu
 - update Emacs packages.
+
+#### 2017/11/9 chage for Ubuntu
+- change color theme
