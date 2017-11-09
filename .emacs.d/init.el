@@ -63,11 +63,12 @@
 ;; テーマ選択
 ;; (load-theme 'solarized-light t)
 ;; (load-theme 'solarized-dark t)
-(load-theme 'gnupack-dark t)
+;; (load-theme 'gnupack-dark t)
+(load-theme 'madhat2r t)
 
 ;;背景色設定
-;;(set-face-background 'default "black")
 (set-face-background 'default "gray5")
+;; (set-face-background 'default "black")
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ screen - buffer                                               ;;;
@@ -281,7 +282,7 @@
 
 ;; hiwin-modeを有効化
 (hiwin-activate)                           ;; hiwin-modeを有効化
-(set-face-background 'hiwin-face "gray8") ;; 非アクティブウィンドウの背景色を設定
+(set-face-background 'hiwin-face "gray15") ;; 非アクティブウィンドウの背景色を設定
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
